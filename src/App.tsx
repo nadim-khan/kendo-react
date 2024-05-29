@@ -1,29 +1,16 @@
 import React from 'react';
-import { Button } from '@progress/kendo-react-buttons';
-import kendoka from './kendoka.svg';
 import './App.scss';
+import MainPage from './components/main-component/main-component';
 
-function App() {
+ const App = ()=> {
+
+  sessionStorage.setItem('token','4cd7d446403fb42b6173c0652b6021ba7a6e508408064cca172fbd0c27c61397')
   const handleClick = React.useCallback(() => {
-    window.open('https://www.telerik.com/kendo-react-ui/components/', '_blank');
+    alert('button Clicked!')
   }, []);
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={kendoka} className="App-logo" alt="kendoka" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <Button
-          themeColor={'primary'}
-          size={"large"}
-          onClick={handleClick}
-        >
-          Learn KendoReact
-        </Button>
-      </header>
-    </div>
+      <MainPage />
   );
 }
 

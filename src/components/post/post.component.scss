@@ -1,0 +1,20 @@
+.comments{
+    margin-top:10px;
+    .comment-head{
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        .userName{
+            font-weight: bolder;
+        }
+        .k-card .k-avatar {
+            width: 43px !important;
+            height: 27px !important;
+            flex-basis: 27px !important;
+        }
+    }
+}
+
+.ml-60{
+    margin-left:60px;
+}

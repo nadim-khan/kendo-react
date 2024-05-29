@@ -18,12 +18,15 @@ import ContactComponent from '../../components/contact/contact.component';
 import SettingComponent from '../../components/setting/setting.component';
 import PostComponent from '../../components/post/post.component';
 import UserComponent from '../../components/users/users.component';
+import ActionComonent from '../action/action.component';
 
 const ParentContainer = () => {
     let navigate = useNavigate();
     const [leftSidebarVisible, setLeftSidebarVisible] = useState(false);
     const [rightSidebarVisible, setRightSidebarVisible] = useState(false);
     const [isExpandedProfile, setExtendedProfile] = useState(false);
+
+    const [isEditClicked,setEditClicked]=useState(false);
 
     const toggleLeftSidebar = () => {
         setLeftSidebarVisible(!leftSidebarVisible);
@@ -44,6 +47,10 @@ const ParentContainer = () => {
     const routeChange = (path) => {
         debugger
         navigate(path);
+    }
+
+    const onRhsEdit = ()=>{
+        setEditClicked(true)
     }
 
     return (
@@ -103,25 +110,7 @@ const ParentContainer = () => {
             </div>
 
             <div id="rightSidebar" className={`sidebar sidebar-right ${rightSidebarVisible ? 'show-right' : ''}`}>
-                <div className="pt-3 pb-3 e">
-                    <ul className="nav flex-column rightUl">
-                        <li className="nav-item" onClick={toggleRightSidebar}>
-                            <span className="k-icon k-font-icon k-i-chevron-left"></span> <a className="nav-link e link-text" href="#">  </a>
-                        </li>
-                        <li className="nav-item d-flex">
-                            <span className="k-icon k-font-icon k-i-pencil"></span> <a className="nav-link e link-text" href="#">Edit</a>
-                        </li>
-                        <li className="nav-item d-flex">
-                            <span className="k-icon k-font-icon k-i-save"></span> <a className="nav-link e link-text" href="#">Save</a>
-                        </li>
-                        <li className="nav-item d-flex">
-                            <span className="k-icon k-font-icon k-i-trash"></span> <a className="nav-link e link-text" href="#">Delete</a>
-                        </li>
-                        <li className="nav-item d-flex">
-                            <span className="k-icon k-font-icon k-i-x"></span> <a className="nav-link e link-text" href="#">Cancel</a>
-                        </li>
-                    </ul>
-                </div>
+                <ActionComonent toggleRightSidebarHandler = {toggleRightSidebar}/>
             </div>
 
 
@@ -132,7 +121,9 @@ const ParentContainer = () => {
                     <Route path='/profile' element={< ProfileComponent />}></Route>
                     <Route path='/post' element={< PostComponent />}></Route>
                     <Route path='/contact' element={< ContactComponent />}></Route>
-                    <Route path='/users' element={< UserComponent />}></Route>
+                    {/* <Route path='/users' element={< UserComponent />}></Route> */}
+                    <Route  path="/users" element={<UserComponent onEditClick={isEditClicked}  />}
+        />
                     <Route path='/setting' element={< SettingComponent />}></Route>
                 </Routes>
 

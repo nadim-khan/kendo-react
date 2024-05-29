@@ -12,13 +12,18 @@ interface UserData {
     gender: string;
     status:string;
   }
-  
-const UserComponent: React.FC = () => {
+
+
+const UserComponent= ({onEditClick}) => {
     let navigate = useNavigate();
     const [userData, setUserData] = useState<UserData[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<any>(null);
     const [currentUser, setCurrentUser] = useState<any>(0);
+
+    useEffect(() => {
+        console.log('Users prop changed:', onEditClick);
+      }, [onEditClick]);
 
     useEffect(()=>{
         const fetUsersList = async ()=>{
@@ -32,6 +37,8 @@ const UserComponent: React.FC = () => {
                 setLoading(false)
             }
         }
+
+        console.log('Users prop changed annnnnnnn:', onEditClick);
         fetUsersList();
     },[])
 

@@ -11,22 +11,47 @@ import {
     BrowserRouter as Router,
     Routes,
     Route
-}
-    from 'react-router-dom';
+} from 'react-router-dom';
 import ProfileComponent from '../../components/profile/profile.comonent';
 import ContactComponent from '../../components/contact/contact.component';
 import SettingComponent from '../../components/setting/setting.component';
 import PostComponent from '../../components/post/post.component';
 import UserComponent from '../../components/users/users.component';
 import ActionComonent from '../action/action.component';
+import { useTranslation } from 'react-i18next';
 
 const ParentContainer = () => {
     let navigate = useNavigate();
+    const { t, i18n } = useTranslation();
+    const languageList = [
+        { name: 'English', value: 'en' },
+        { name: 'French', value: 'fr' },
+    ]
+    const [selectedLanguage, setSelectedLanguage] = useState('en');
     const [leftSidebarVisible, setLeftSidebarVisible] = useState(false);
     const [rightSidebarVisible, setRightSidebarVisible] = useState(false);
     const [isExpandedProfile, setExtendedProfile] = useState(false);
+    const [isEditClicked, setEditClicked] = useState(false);
+    const [isOpen, setIsOpen] = useState(false);
+    const [isOpenNotification, setIsOpenNotification] = useState(false);
 
-    const [isEditClicked,setEditClicked]=useState(false);
+    const toggleDropdown = () => {
+        setIsOpen(!isOpen);
+        setIsOpenNotification(false);
+        setRightSidebarVisible(false);
+    };
+
+    const toggleNotification = () => {
+        setIsOpenNotification(!isOpenNotification);
+        setIsOpen(false);
+        setRightSidebarVisible(false);
+    };
+
+    const changeLanguage = (lng) => {
+        i18n.changeLanguage(lng);
+        setSelectedLanguage(lng);
+        setIsOpen(false);
+    };
 
     const toggleLeftSidebar = () => {
         setLeftSidebarVisible(!leftSidebarVisible);
@@ -34,10 +59,14 @@ const ParentContainer = () => {
 
     const toggleRightSidebar = () => {
         setRightSidebarVisible(!rightSidebarVisible);
+        setIsOpen(false);
+        setIsOpenNotification(false);
     };
 
     const MouseOver = () => {
-        setExtendedProfile(true)
+        setExtendedProfile(true);
+        setIsOpen(false);
+        setIsOpenNotification(false);
     }
 
     const MouseOut = () => {
@@ -49,7 +78,7 @@ const ParentContainer = () => {
         navigate(path);
     }
 
-    const onRhsEdit = ()=>{
+    const onRhsEdit = () => {
         setEditClicked(true)
     }
 
@@ -64,13 +93,43 @@ const ParentContainer = () => {
                         </div>
 
                         <div className={`navRightMenu d-flex justify-content-between ${isExpandedProfile ? 'w-20rem' : 'w-7rem'}`}>
-                            <BadgeContainer className='curp mr-1rem' >
-                                <SvgIcon icon={bellIcon} size={"large"} />
-                                <Badge themeColor="warning">11</Badge>
+                            <div id="notificationMenu" onClick={toggleNotification}>
+                                <BadgeContainer className='curp mr-1rem' >
+                                <SvgIcon icon={bellIcon} size={"large"} id="dropdownMenuButton"/>
+                                <Badge themeColor="warning" >11</Badge>
                             </BadgeContainer>
-                            <Avatar className='curp mr-1rem' rounded="full" type="icon" style={{ marginRight: 5 }}>
-                                <SvgIcon icon={plusIcon} />
-                            </Avatar>
+                            </div>
+                            <ul className={`dropdown-menu ${isOpenNotification ? 'showNoti' : ''}`} aria-labelledby="notificationMenu">
+                               <>
+                               <div className='container-fluid d-flex justify-content-between top'>
+                                <span className="head">Notification</span ><span className='markRead'>Mark All As Read</span></div> 
+                                {languageList.map((language,index) => (
+                                    <div className='listMain container'>
+                                        <div className=''>Nadeem Has posted one update</div>
+                                        <div className=''>12 March 2024</div>
+                                    </div>
+                                  
+                                ))
+                                }</>
+                            </ul>
+
+                            <div id="dropdownMenuButton"
+                                        onClick={toggleDropdown} >
+                                <Avatar className='curp mr-1rem' rounded="full" type="icon" >
+                                    <SvgIcon icon={plusIcon} />
+                                </Avatar>
+                            </div>
+
+                            <ul className={`dropdown-menu ${isOpen ? 'show' : ''}`} aria-labelledby="dropdownMenuButton">
+                                {languageList.map((language,index) => (
+                                    <li className='curp' key={`li-${language.value}-${index}`} onClick={() => { changeLanguage(language.value) }}>
+                                        <a key={`a-${language.value}-${index}`} className="dropdown-item" >
+                                            {language.name}
+                                        </a>
+                                    </li>
+                                ))
+                                }
+                            </ul>
                             <div className='userMenu' onMouseOver={MouseOver} onMouseOut={MouseOut}>
                                 <Avatar rounded="full" type="icon" style={{ marginRight: 5 }}>
                                     <SvgIcon icon={userIcon} />
@@ -90,27 +149,27 @@ const ParentContainer = () => {
 
                         </li>
                         <li className="nav-item d-flex" onClick={() => routeChange('/')}>
-                            <a className="nav-link e link-text"  > Home </a> <span className="k-icon k-font-icon k-i-home"></span>
+                            <a className="nav-link e link-text"  > {t('home')} </a> <span className="k-icon k-font-icon k-i-home"></span>
                         </li>
                         <li className="nav-item d-flex" onClick={() => routeChange('/Users')}>
-                            <a className="nav-link e link-text"  >Users</a> <span className="k-icon k-font-icon k-i-envelop"></span>
+                            <a className="nav-link e link-text"  >{t('users')}</a> <span className="k-icon k-font-icon k-i-envelop"></span>
                         </li>
                         <li className="nav-item d-flex" onClick={() => routeChange('/Post')}>
-                            <a className="nav-link e link-text"  >Post</a> <span className="k-icon k-font-icon k-i-inherited"></span>
+                            <a className="nav-link e link-text"  >{t('post')}</a> <span className="k-icon k-font-icon k-i-inherited"></span>
                         </li>
                         <li className="nav-item d-flex" onClick={() => routeChange('/profile')}>
-                            <a className="nav-link e link-text"  >Profile</a> <span className="k-icon k-font-icon k-i-user"></span>
+                            <a className="nav-link e link-text"  >{t('profile')}</a> <span className="k-icon k-font-icon k-i-user"></span>
                         </li>
-                        
+
                         <li className="nav-item d-flex" onClick={() => routeChange('/setting')}>
-                            <a className="nav-link e link-text" >Settings</a> <span className="k-icon k-font-icon k-i-cog"></span>
+                            <a className="nav-link e link-text" >{t('settings')}</a> <span className="k-icon k-font-icon k-i-cog"></span>
                         </li>
                     </ul>
                 </div>
             </div>
 
             <div id="rightSidebar" className={`sidebar sidebar-right ${rightSidebarVisible ? 'show-right' : ''}`}>
-                <ActionComonent toggleRightSidebarHandler = {toggleRightSidebar}/>
+                <ActionComonent toggleRightSidebarHandler={toggleRightSidebar} />
             </div>
 
 
@@ -121,9 +180,9 @@ const ParentContainer = () => {
                     <Route path='/profile' element={< ProfileComponent />}></Route>
                     <Route path='/post' element={< PostComponent />}></Route>
                     <Route path='/contact' element={< ContactComponent />}></Route>
-                    {/* <Route path='/users' element={< UserComponent />}></Route> */}
-                    <Route  path="/users" element={<UserComponent onEditClick={isEditClicked}  />}
-        />
+                    <Route path="/users" element={
+                        <UserComponent onEditClick={isEditClicked} />
+                    } />
                     <Route path='/setting' element={< SettingComponent />}></Route>
                 </Routes>
 

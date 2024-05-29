@@ -66,21 +66,23 @@
  }
 
  .sidebar-left {
-     left: -100px;
+     left: -105px;
 
  }
 
  .sidebar-right {
-     right: -100px;
+     right: -105px;
  }
 
  .sidebar.show-left {
-     transform: translateX(100px);
+     transform: translateX(105px);
+     transition: transform 0.3s ease;
 
  }
 
  .sidebar.show-right {
-     transform: translateX(-100px);
+     transform: translateX(-105px);
+     transition: transform 0.3s ease;
  }
 
  .content {
@@ -132,7 +134,7 @@
          width:7rem;
          transition: transform 0.3s ease;
          .mr-1rem{
-            margin-right:1rem;
+            margin-right:1.5rem;
          }
          .userMenu{
             color: #161B2F;
@@ -155,7 +157,7 @@
     transition: transform 0.3s ease;
  }
  .w-7rem{
-    width:7rem !important;
+    width:8.8rem !important;
     transition: transform 0.3s ease;
  };
 
@@ -163,3 +165,47 @@
     height:90vh;
     overflow-y: auto;
  }
+
+ .k-popup {
+    z-index: 1000; // Set the z-index of the dropdown menu
+  }
+
+  .dropdown-menu.show {
+    display: block;
+    position: absolute;
+    top: 55px;
+    right:55px;
+    a{
+        font-size: 13px;
+    }
+}
+.dropdown-menu.showNoti{
+    display: block;
+    position: absolute;
+    top: 55px;
+    right: 3.4rem;
+    width: 20rem;
+    padding:5px;
+    a{
+        font-size: 13px;
+    }
+    .head{
+        color:#161B2F;
+        font-size: 14px;
+        font-weight: bolder;
+
+    }
+    .markRead{
+        color:#e46d0b;
+        font-size: 12px;
+        font-weight: bolder;
+        text-decoration: underline;
+    }
+    .listMain{
+        font-size: 11px;
+        margin: 13px 0;
+    }
+    .top{
+        margin-bottom:15px;
+    }
+}

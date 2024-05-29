@@ -1,0 +1,18 @@
+{
+    "home": "Accueil",
+    "user": "Utilisateur",
+    "post": "Poste",
+    "profile": "Profil",
+    "settings": "Paramètre",
+    "save": "Sauvegarder",
+    "edit": "Modifier",
+    "cancel": "Annuler",
+    "delete":"Supprimer",
+    "pdf":"PDF",
+    "excel":"Excel",
+    "import":"Importer",
+    "export":"Exporter",
+    "word":"Word",
+    "upload":"Télécharger",
+    "download":"Télécharger"
+  }

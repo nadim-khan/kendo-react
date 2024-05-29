@@ -1,0 +1,18 @@
+{
+    "home": "Home",
+    "user": "User",
+    "post": "Post",
+    "profile": "Profile",
+    "settings": "Settings",
+    "save": "Save",
+    "edit": "Edit",
+    "cancel": "Cancel",
+    "delete":"Delete",
+    "pdf":"PDF",
+    "excel":"Excel",
+    "import":"Import",
+    "export":"Export",
+    "word":"Word",
+    "upload":"Upload",
+    "download":"Download"
+  }

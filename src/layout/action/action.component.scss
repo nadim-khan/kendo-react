@@ -1,0 +1,35 @@
+.disabled {
+    color: black;
+    background-color: gray;
+    pointer-events: none;
+    opacity: 0.5;
+  }
+
+  .rightUl {
+    margin-top: 40px;
+
+    li {
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start !important;
+        cursor: pointer !important;
+       color:#fff;
+       a{
+           color:#fff
+       }
+        .k-icon {
+            margin: 10px;
+            margin-left: 20px;
+        }
+    }
+
+    li:hover {
+       background-color: red;
+       a{
+           color:#fff
+       }
+       
+    }
+}
+

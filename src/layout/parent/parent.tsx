@@ -73,6 +73,22 @@ const ParentContainer = () => {
         setExtendedProfile(false)
     }
 
+    const MouseOverLeftSidebar=()=>{
+        setLeftSidebarVisible(true);
+    }
+
+    const MouseOutLeftSidebar = ()=>{
+        setLeftSidebarVisible(false);
+    }
+
+    const MouseOverRightSidebar=()=>{
+        setRightSidebarVisible(true);
+    }
+
+    const MouseOutRightSidebar = ()=>{
+        setRightSidebarVisible(false);
+    }
+
     const routeChange = (path) => {
         debugger
         navigate(path);
@@ -141,13 +157,9 @@ const ParentContainer = () => {
                 </div>
             </nav>
 
-            <div id="leftSidebar" className={`sidebar sidebar-left ${leftSidebarVisible ? 'show-left' : ''}`}>
+            <div id="leftSidebar" onMouseOver={MouseOverLeftSidebar} onMouseOut={MouseOutLeftSidebar} className={`sidebar sidebar-left ${leftSidebarVisible ? 'show-left' : ''}`}>
                 <div className="pt-3 pb-3 e">
-                    <ul className="nav flex-column leftUl">
-                        <li className="nav-item d-flex" onClick={toggleLeftSidebar}>
-                            <a className="nav-link e link-text" >  </a> <span className="k-icon k-font-icon k-i-chevron-right"></span>
-
-                        </li>
+                    <ul className="nav flex-column leftUl" >
                         <li className="nav-item d-flex" onClick={() => routeChange('/')}>
                             <a className="nav-link e link-text"  > {t('home')} </a> <span className="k-icon k-font-icon k-i-home"></span>
                         </li>
@@ -168,7 +180,7 @@ const ParentContainer = () => {
                 </div>
             </div>
 
-            <div id="rightSidebar" className={`sidebar sidebar-right ${rightSidebarVisible ? 'show-right' : ''}`}>
+            <div id="rightSidebar" onMouseOver={MouseOverRightSidebar} onMouseOut={MouseOutRightSidebar} className={`sidebar sidebar-right ${rightSidebarVisible ? 'show-right' : ''}`}>
                 <ActionComonent toggleRightSidebarHandler={toggleRightSidebar} />
             </div>
 

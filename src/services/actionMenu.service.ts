@@ -1,13 +1,5 @@
 let actionList = [
     {
-        index:0,
-        name:'',
-        icon:'chevron-left',
-        type: 'expand',
-        isDisabled:false,
-        isHidden:false
-    },
-    {
         index:1,
         name:'edit',
         icon:'pencil',

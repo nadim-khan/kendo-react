@@ -4,89 +4,104 @@ import { Avatar, Card, CardActions, CardBody, CardHeader, CardSubtitle, CardTitl
 import { SvgIcon } from '@progress/kendo-react-common';
 import { heartIcon, userIcon } from '@progress/kendo-svg-icons';
 import { useNavigate } from 'react-router-dom';
+import ReusableTable from '../../reusable/reusable-table/reusable-table.component';
+import CustomPagination from '../../reusable/custom-pagination/cutom-page.component';
 
 interface UserData {
     id: number;
     name: string;
-    email:string;
+    email: string;
     gender: string;
-    status:string;
-  }
+    status: string;
+}
 
 
-const UserComponent= ({onEditClick}) => {
+const UserComponent = ({ onEditClick }) => {
     let navigate = useNavigate();
     const [userData, setUserData] = useState<UserData[]>([]);
+    const [originalUserData, setOriginalUserData] = useState<UserData[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<any>(null);
     const [currentUser, setCurrentUser] = useState<any>(0);
+    const [tableSearchVal, setTableSearchVal] = useState('');
+
+    const [currentPage, setCurrentPage] = useState(0);
+    const totalPages = 30; // Assuming we have 10 pages in total
+
+    const perPage = 10;
+    const currentPageData = userData;
+    
+
+    const columns = [
+        { header: 'Name', accessor: 'name' },
+        { header: 'Status', accessor: 'status' },
+        { header: 'Gender', accessor: 'gender' },
+        { header: 'Email ID', accessor: 'email' },
+    ];
+
+    const handlePageChange = async (pageNumber) => {
+        debugger 
+        setCurrentPage(pageNumber);
+        try {
+            let result = await apiService.getAllUsersList(pageNumber,perPage);
+            setOriginalUserData(result)
+            if(tableSearchVal && tableSearchVal !==''){
+                let filteredData = originalUserData.filter(data=>data.name.includes(tableSearchVal) || data.email.includes(tableSearchVal))
+                setUserData(filteredData);
+            }else{
+                setUserData(originalUserData);
+            }
+            
+        } catch (err) {
+            setError('Failed to fetch data');
+        } finally {
+            setLoading(false);
+        }
+    };
 
     useEffect(() => {
-        console.log('Users prop changed:', onEditClick);
-      }, [onEditClick]);
+        
+    }, [onEditClick]);
 
-    useEffect(()=>{
-        const fetUsersList = async ()=>{
-            try{
-                const result = await apiService.getAllUsersList();
-                setUserData(result)
-            }catch(err){
+    useEffect(() => {
+        const fetUsersList = async () => {
+            try {
+                const result = await apiService.getAllUsersList(1,perPage);
+                setUserData(result);
+                setOriginalUserData(result)
+            } catch (err) {
                 setError(err)
             }
-            finally{
+            finally {
                 setLoading(false)
             }
         }
 
-        console.log('Users prop changed annnnnnnn:', onEditClick);
         fetUsersList();
-    },[])
+    }, [])
 
-    const loginUser = (id)=>{
-        sessionStorage.setItem('currentUser',id)
+    const loginUser = (id) => {
         setCurrentUser(id);
-        
         navigate('/Post');
+    }
+
+    const onSeachInTable =(event)=>{
+        setTableSearchVal(event);
+        if(tableSearchVal && tableSearchVal !==''){
+            let filteredData = originalUserData.filter(data=>data.name.includes(tableSearchVal) || data.email.includes(tableSearchVal))
+            setUserData(filteredData)
+        }else{
+            setUserData(originalUserData);
+        }
     }
 
     return (
         <div>
-            {userData.map(item => (
-                    <div key={item.id}>
-                        <Card style={{ boxShadow: "0 0 4px 0 rgba(0, 0, 0, .1)", marginTop: "15px", }} >
-                            <CardHeader className="k-hbox" style={{ background: "transparent" }} >
-                                <Avatar className='curp mr-1rem' rounded="full" type="icon" style={{ marginRight: 5 }}> </Avatar>
-                                <div>
-                                    <CardTitle style={{ marginBottom: "4px" }}>
-                                        {item.name}
-                                    </CardTitle>
-                                    <CardSubtitle>
-                                        {item.gender}
-                                    </CardSubtitle>
-                                </div>
-                            </CardHeader>
-                            
-                            <CardActions style={{ display: "flex", justifyContent: "space-between" }} >
-                                <div>
-                                    <button
-                                        className="k-button k-button-md k-rounded-md k-button-flat k-button-flat-base"
-                                    >
-                                        <SvgIcon icon={userIcon} onClick={()=>loginUser(item.id)}/>
-                                    </button>
-                                </div>
-                                <span
-                                    style={{
-                                        fontSize: "13px",
-                                        alignSelf: "center",
-                                        color: "#656565",
-                                    }}
-                                >
-                                    {item.id} likes
-                                </span>
-                            </CardActions>
-                        </Card>
-                    </div>
-                ))}
+            <div>
+                <ReusableTable data={currentPageData} columns={columns} isShowRowNumber={true} onTableSearch={onSeachInTable}/>
+                <CustomPagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
+
+            </div>
         </div>
     );
 }

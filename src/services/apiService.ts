@@ -29,8 +29,8 @@ interface CreateDataRequest {
 }
 
 const apiService = {
-  getAllUsersList: async (): Promise<UserData[]> => {
-    const response = await apiClient.get<UserData[]>('/users');
+  getAllUsersList: async (pageNumber,pageSize): Promise<UserData[]> => {
+    const response = await apiClient.get<UserData[]>(`/users?page=${pageNumber}&per_page=${pageSize}`);
     return response.data;
   },
 

@@ -6,7 +6,11 @@ import reportWebVitals from './reportWebVitals';
 import i18n from 'i18next';
 import { I18nextProvider, initReactI18next } from 'react-i18next';
 import en from '../src/assets/i18n/en.json';
-import fr from '../src/assets/i18n/fr.json'
+import fr from '../src/assets/i18n/fr.json';
+import hi from '../src/assets/i18n/hi.json';
+import ar from '../src/assets/i18n/ar.json';
+import ch from '../src/assets/i18n/ch.json';
+import vn from '../src/assets/i18n/vn.json';
 import i18next from 'i18next';
 
 i18n
@@ -15,6 +19,10 @@ i18n
     resources: {
       en: { translation: en },
       fr: { translation: fr },
+      hi: { translation: hi },
+      ar: { translation: ar },
+      ch: { translation: ch },
+      vn: { translation: vn },
     },
     fallbackLng: 'en',
     interpolation: {

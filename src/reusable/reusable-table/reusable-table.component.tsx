@@ -6,14 +6,26 @@ import './reusable-table.scss'
 
 const ReusableTable = ({ data, columns ,...args}) => {
     const [inputValue, setInputValue] = useState('');
+
     const onSearchChange = (event)=>{
         args.onTableSearch(event.value)
         setInputValue(event.value)
     }
+    const onRowClick = (rowData)=>{
+        args.onRowClick(rowData)
+    }
+
+    const clearSearch = ()=>{
+        args.onTableSearch('')
+        setInputValue('')
+    }
+
     return (
-            <div>
+            <div className='reusableTable'>
                 <div className="k-search-box">
-                <span className="search-icon">🔍</span>
+
+               {  inputValue==='' && <span className="k-icon k-font-icon k-i-search curp"></span>}
+               { inputValue!=='' && <span className="k-icon k-font-icon k-i-x curp" onClick={clearSearch}></span>}
                 <Input placeholder="Search..." className="search-input" value={inputValue} onChange={onSearchChange}/>
             </div>
             <Table striped bordered hover>
@@ -27,10 +39,10 @@ const ReusableTable = ({ data, columns ,...args}) => {
             </thead>
             <tbody>
                 {data.map((row, rowIndex) => (
-                    <tr key={rowIndex}>
+                    <tr key={rowIndex} onClick={()=>onRowClick(row)} className='curp'>
                         {args.hasOwnProperty('isShowRowNumber') && args.isShowRowNumber && <td>{rowIndex+1}</td>}
                         {columns.map((column, colIndex) => (
-                            <td key={colIndex}>{row[column.accessor]}</td>
+                            <td key={colIndex} className='table-cell'>{row[column.accessor]}</td>
                         ))}
                     </tr>
                 ))}

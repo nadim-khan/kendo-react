@@ -1,6 +1,6 @@
 {
     "home": "Home",
-    "user": "User",
+    "users": "Users",
     "post": "Post",
     "profile": "Profile",
     "settings": "Settings",
@@ -14,5 +14,13 @@
     "export":"Export",
     "word":"Word",
     "upload":"Upload",
-    "download":"Download"
+    "download":"Download",
+    "add_user":"Add User",
+    "notification":"Notification",
+    "english":"English",
+    "hindi":"Hindi",
+    "arabic":"Arabic",
+    "chinese":"Chinese",
+    "french":"French",
+    "vietnamese":"Vietnamese"
   }

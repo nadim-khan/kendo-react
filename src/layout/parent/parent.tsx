@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './parent.scss';
 import kendoka from '../../kendoka.svg';
 import { Avatar } from "@progress/kendo-react-layout";
@@ -6,7 +6,7 @@ import { SvgIcon } from "@progress/kendo-react-common";
 import { plusIcon, userIcon, bellIcon } from "@progress/kendo-svg-icons";
 import { Badge, BadgeContainer } from "@progress/kendo-react-indicators";
 import Home from '../../components/home/home.component';
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import {
     BrowserRouter as Router,
     Routes,
@@ -19,13 +19,27 @@ import PostComponent from '../../components/post/post.component';
 import UserComponent from '../../components/users/users.component';
 import ActionComonent from '../action/action.component';
 import { useTranslation } from 'react-i18next';
+import actionList from '../../services/actionMenu.service';
+
+interface ActionList {
+    index: number;
+    name: string;
+    icon: string;
+    type: string;
+    isDisabled: boolean;
+    isHidden: boolean;
+}
 
 const ParentContainer = () => {
     let navigate = useNavigate();
     const { t, i18n } = useTranslation();
     const languageList = [
-        { name: 'English', value: 'en' },
-        { name: 'French', value: 'fr' },
+        { name: 'english', value: 'en' },
+        { name: 'hindi', value: 'hi' },
+        { name: 'arabic', value: 'ar' },
+        { name: 'french', value: 'fr' },
+        { name: 'vietnamese', value: 'vn' },
+        { name: 'chinese', value: 'ch' }
     ]
     const [selectedLanguage, setSelectedLanguage] = useState('en');
     const [leftSidebarVisible, setLeftSidebarVisible] = useState(false);
@@ -34,6 +48,17 @@ const ParentContainer = () => {
     const [isEditClicked, setEditClicked] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
     const [isOpenNotification, setIsOpenNotification] = useState(false);
+    const [currentActionList, setCurrentActionList] = useState<ActionList[]>([]);
+
+    const location = useLocation();
+    useEffect(() => {
+        updateActionList(location.pathname)
+      }, [location]);
+
+    const updateActionList =(pathname)=>{
+        let allPath = actionList;
+        setCurrentActionList(allPath)
+    }
 
     const toggleDropdown = () => {
         setIsOpen(!isOpen);
@@ -138,9 +163,9 @@ const ParentContainer = () => {
 
                             <ul className={`dropdown-menu ${isOpen ? 'show' : ''}`} aria-labelledby="dropdownMenuButton">
                                 {languageList.map((language,index) => (
-                                    <li className='curp' key={`li-${language.value}-${index}`} onClick={() => { changeLanguage(language.value) }}>
+                                    <li className={`curp ${selectedLanguage == language.value ? 'activeLang' : null} `} key={`li-${language.value}-${index}`} onClick={() => { changeLanguage(language.value) }}>
                                         <a key={`a-${language.value}-${index}`} className="dropdown-item" >
-                                            {language.name}
+                                            {t(language.name)}
                                         </a>
                                     </li>
                                 ))
@@ -181,7 +206,7 @@ const ParentContainer = () => {
             </div>
 
             <div id="rightSidebar" onMouseOver={MouseOverRightSidebar} onMouseOut={MouseOutRightSidebar} className={`sidebar sidebar-right ${rightSidebarVisible ? 'show-right' : ''}`}>
-                <ActionComonent toggleRightSidebarHandler={toggleRightSidebar} />
+                <ActionComonent actionList = {currentActionList} toggleRightSidebarHandler={toggleRightSidebar} />
             </div>
 
 

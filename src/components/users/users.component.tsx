@@ -80,8 +80,9 @@ const UserComponent = ({ onEditClick }) => {
         fetUsersList();
     }, [])
 
-    const loginUser = (id) => {
-        setCurrentUser(id);
+    const onTableRowClick = (rowData) => {
+        setCurrentUser(rowData.id);
+        sessionStorage.setItem('currentUser',rowData.id);
         navigate('/Post');
     }
 
@@ -98,7 +99,13 @@ const UserComponent = ({ onEditClick }) => {
     return (
         <div>
             <div>
-                <ReusableTable data={currentPageData} columns={columns} isShowRowNumber={true} onTableSearch={onSeachInTable}/>
+                <ReusableTable 
+                data={currentPageData} 
+                columns={columns} 
+                isShowRowNumber={true} 
+                onTableSearch={onSeachInTable}
+                onRowClick = {onTableRowClick}
+                />
                 <CustomPagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
 
             </div>

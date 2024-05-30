@@ -1,14 +1,23 @@
 let actionList = [
     {
         index:1,
+        name:'add_user',
+        icon:'plus-outline',
+        type:'action',
+        isDisabled:false,
+        isHidden:false
+    },
+    {
+        index:2,
         name:'edit',
         icon:'pencil',
         type:'action',
         isDisabled:false,
-        isHidden:true
+        isHidden:false
     },
+    
     {
-        index:2,
+        index:3,
         name:'save',
         icon:'save',
         type:'action',
@@ -16,7 +25,7 @@ let actionList = [
         isHidden:false
     },
     {
-        index:3,
+        index:4,
         name:'delete',
         icon:'trash',
         type:'action',
@@ -24,7 +33,7 @@ let actionList = [
         isHidden:false
     },
     {
-        index:4,
+        index:5,
         name:'cancel',
         icon:'x',
         type:'action',
@@ -32,7 +41,7 @@ let actionList = [
         isHidden:false
     },
     {
-        index:5,
+        index:6,
         name:'import',
         icon:'import',
         type:'action',
@@ -40,7 +49,7 @@ let actionList = [
         isHidden:false
     },
     {
-        index:6,
+        index:7,
         name:'export',
         icon:'export',
         type:'action',
@@ -48,7 +57,7 @@ let actionList = [
         isHidden:false
     },
     {
-        index:7,
+        index:8,
         name:'excel',
         icon:'file-excel',
         type:'action',
@@ -56,7 +65,7 @@ let actionList = [
         isHidden:false
     },
     {
-        index:8,
+        index:9,
         name:'pdf',
         icon:'file-pdf',
         type:'action',
@@ -64,7 +73,7 @@ let actionList = [
         isHidden:false
     },
     {
-        index:8,
+        index:10,
         name:'word',
         icon:'file-word',
         type:'action',
@@ -72,7 +81,7 @@ let actionList = [
         isHidden:false
     },
     {
-        index:9,
+        index:11,
         name:'upload',
         icon:'upload',
         type:'action',
@@ -80,7 +89,7 @@ let actionList = [
         isHidden:false
     },
     {
-        index:9,
+        index:12,
         name:'download',
         icon:'download',
         type:'action',

@@ -25,7 +25,21 @@
             color:red
         }
      }
+
+     li:last-child {
+        width: 100%;
+        border-bottom: none;
+        font-weight: bold;
+        position: absolute;
+        bottom: 10px;
+        color: blue; /* Change color of last li */
+        cursor: pointer;
+        .k-icon{
+            font-size: 25px;
+        }
+      }
  }
+
 
  .rightUl {
      margin-top: 40px;

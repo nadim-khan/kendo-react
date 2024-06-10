@@ -1,0 +1,126 @@
+
+
+.mainTicTacView{
+    .heading{
+        display: flex;
+        justify-content: center;
+    }
+    .ticTacForm{
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+        input{
+            margin:10px;
+        }
+        select{
+            height: 27px;
+            margin-right: 15px;
+        }
+    
+       
+    }
+    
+    .mainGame{
+        height:100%;
+        .gameView{
+                width: 70%;
+                border-right: 1px solid gray;
+                margin-right: 10px;
+                ol, ul {
+                    padding-left: 30px;
+                    .moveButton{
+                        background-color: #003399 !important;
+                        margin-bottom: 10px;
+                        width: 20rem;
+                        display: flex;
+                    }
+                    .moveButton:hover{
+                        background-color: #507acf !important;
+                        color:#000;
+                    }
+                  }
+                  
+                  .board-row:after {
+                    clear: both;
+                    content: "";
+                    display: table;
+                  }
+                  
+                  .status {
+                    margin-bottom: 10px;
+                  }
+                  
+                  .square {
+                    border: 1px solid #999;
+                    float: left;
+                    font-size: 24px;
+                    font-weight: bold;
+                    line-height: 10rem;
+                    height: 10rem;
+                    margin-right: -1px;
+                    margin-top: -1px;
+                    padding: 0;
+                    text-align: center;
+                    width: 10rem;
+                    background-color: #ffffff;
+                    color:#ffffff;
+                    font-size:45px;
+                    cursor: pointer !important;
+                  }
+                  
+                  .square:focus {
+                    outline: none;
+                  }
+                  
+                  .kbd-navigation .square:focus {
+                    background: #ddd;
+                  }
+                  
+                  .game {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: space-between;
+                    margin:0 10px;
+                  }
+                  
+                  .game-info {
+                    margin-left: 20px;
+                  }
+
+                  .text-red{
+                    color:#f00 !important;
+                    background-color: #000;
+                  }
+
+                  .text-black{
+                    color:#000 !important;
+                    background-color: #f00;
+                  }
+                  .glowing-text {
+                    color: #fff; /* Text color */
+                    text-shadow: 0 0 10px #00f, 0 0 20px #0ff, 0 0 30px #0f0, 0 0 40px #ff0, 0 0 50px #f00; /* Text shadow with multiple layers */
+                    animation: glow 1s infinite alternate; /* Animation for the glowing effect */
+                    cursor: pointer;
+                  }
+                  
+                  @keyframes glow {
+                    to {
+                      text-shadow: 0 0 20px #00f, 0 0 30px #0ff, 0 0 40px #0f0, 0 0 50px #ff0, 0 0 60px #f00; /* Change text shadow to create pulsating effect */
+                    }
+                  }
+        }
+        .pontsTableView{
+            width:28%;
+        }
+    }
+
+    .isActive{
+        color:green;
+        font-weight: bold;
+    }
+      
+     
+      
+
+}

@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.scss';
 import MainPage from './components/main-component/main-component';
+import { ThemeProvider } from './themes/ThemeContext';
 
  const App = ()=> {
 
@@ -10,7 +11,10 @@ import MainPage from './components/main-component/main-component';
   }, []);
 
   return (
+    <ThemeProvider>
       <MainPage />
+    </ThemeProvider>
+      
   );
 }
 

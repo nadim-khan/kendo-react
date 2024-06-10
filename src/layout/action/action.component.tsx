@@ -9,13 +9,13 @@ const ActionComponent = ({actionList,toggleRightSidebarHandler}) => {
     }
 
     return (
-        <div className="pt-3 pb-3 e">
-            <ul className="nav flex-column rightUl">
+        <div className="pt-3 pb-3 e" key='action-div-1'>
+            <ul className="nav flex-column rightUl" key='action-ul'>
                 {actionList.map((action,index)=>(
-                    <>
-                    {!action.isHidden && <li className={`nav-item ${action.isDisabled ? 'disabled':null} ${action.isHidden ? 'hidden':null}`} key={index} onClick={action.type === 'expand' ? toggleRightSidebarHandler :(()=>{buttonClick(action.name)})}>
+                    <div key={`dd-iv--${index}`} >
+                    {!action.isHidden && <li className={`nav-item ${action.isDisabled ? 'disabled':null} ${action.isHidden ? 'hidden':null}`} key={`s-li-${index}`}  onClick={action.type === 'expand' ? toggleRightSidebarHandler :(()=>{buttonClick(action.name)})}>
                     <span key={`s-${index}`} className={`k-icon k-font-icon k-i-${action.icon}`}></span> <a key={`a-${index}`} className="nav-link e link-text" >{t(action.name)}  </a>
-                </li>} </>
+                </li>} </div>
                     
                 ))}
                 

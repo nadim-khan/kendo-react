@@ -20,6 +20,8 @@ import UserComponent from '../../components/users/users.component';
 import ActionComonent from '../action/action.component';
 import { useTranslation } from 'react-i18next';
 import actionList from '../../services/actionMenu.service';
+import { useTheme } from '../../themes/ThemeContext';
+import TicTacToeComponent from '../../components/tictactoe/tictactoe.component';
 
 interface ActionList {
     index: number;
@@ -31,6 +33,7 @@ interface ActionList {
 }
 
 const ParentContainer = () => {
+    const { theme, toggleTheme } = useTheme();
     let navigate = useNavigate();
     const { t, i18n } = useTranslation();
     const languageList = [
@@ -49,6 +52,12 @@ const ParentContainer = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [isOpenNotification, setIsOpenNotification] = useState(false);
     const [currentActionList, setCurrentActionList] = useState<ActionList[]>([]);
+    const [isDarkMode, setIsDarkMode] = useState(false);
+
+    const toggleDarkMode = () => {
+        toggleTheme()
+      setIsDarkMode(!isDarkMode);
+    };
 
     const location = useLocation();
     useEffect(() => {
@@ -140,14 +149,14 @@ const ParentContainer = () => {
                                 <Badge themeColor="warning" >11</Badge>
                             </BadgeContainer>
                             </div>
-                            <ul className={`dropdown-menu ${isOpenNotification ? 'showNoti' : ''}`} aria-labelledby="notificationMenu">
+                            <ul className={`dropdown-menu ${isOpenNotification ? 'showNoti' : ''}`} key = 'ul-noti' aria-labelledby="notificationMenu">
                                <>
                                <div className='container-fluid d-flex justify-content-between top'>
                                 <span className="head">Notification</span ><span className='markRead'>Mark All As Read</span></div> 
                                 {languageList.map((language,index) => (
-                                    <div className='listMain container'>
-                                        <div className=''>Nadeem Has posted one update</div>
-                                        <div className=''>12 March 2024</div>
+                                    <div className='listMain container' key = {`d-noti-${index}`}>
+                                        <div className='' key = {`d1-noti-${index}`}>Nadeem Has posted one update</div>
+                                        <div className='' key = {`d2-noti-${index}`}>12 March 2024</div>
                                     </div>
                                   
                                 ))
@@ -197,9 +206,14 @@ const ParentContainer = () => {
                         <li className="nav-item d-flex" onClick={() => routeChange('/profile')}>
                             <a className="nav-link e link-text"  >{t('profile')}</a> <span className="k-icon k-font-icon k-i-user"></span>
                         </li>
-
+                        <li className="nav-item d-flex" onClick={() => routeChange('/tictactoe')}>
+                            <a className="nav-link e link-text"  >{t('tictactoe')}</a> <span className="k-icon k-font-icon k-i-user"></span>
+                        </li>
                         <li className="nav-item d-flex" onClick={() => routeChange('/setting')}>
                             <a className="nav-link e link-text" >{t('settings')}</a> <span className="k-icon k-font-icon k-i-cog"></span>
+                        </li>
+                        <li className="nav-item d-flex" onClick={toggleDarkMode }>
+                            <a className="nav-link e link-text" >{isDarkMode ? t('Light Mode') : t('Dark Mode')}</a> <span className="k-icon k-font-icon k-i-brightness-contrast"></span>
                         </li>
                     </ul>
                 </div>
@@ -220,6 +234,7 @@ const ParentContainer = () => {
                     <Route path="/users" element={
                         <UserComponent onEditClick={isEditClicked} />
                     } />
+                    <Route path='/tictactoe' element={< TicTacToeComponent />}></Route>
                     <Route path='/setting' element={< SettingComponent />}></Route>
                 </Routes>
 

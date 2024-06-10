@@ -11,8 +11,11 @@ const ReusableTable = ({ data, columns ,...args}) => {
         args.onTableSearch(event.value)
         setInputValue(event.value)
     }
+
     const onRowClick = (rowData)=>{
-        args.onRowClick(rowData)
+        if(args.hasOwnProperty('isRowClickEnabled') && args.isRowClickEnabled){
+            args.onRowClick(rowData)
+        }
     }
 
     const clearSearch = ()=>{
@@ -22,12 +25,14 @@ const ReusableTable = ({ data, columns ,...args}) => {
 
     return (
             <div className='reusableTable'>
+                { args && args.hasOwnProperty('isSearchEnabled') && args.isSearchEnabled &&
                 <div className="k-search-box">
 
                {  inputValue==='' && <span className="k-icon k-font-icon k-i-search curp"></span>}
                { inputValue!=='' && <span className="k-icon k-font-icon k-i-x curp" onClick={clearSearch}></span>}
                 <Input placeholder="Search..." className="search-input" value={inputValue} onChange={onSearchChange}/>
             </div>
+    }
             <Table striped bordered hover>
             <thead>
                 <tr>

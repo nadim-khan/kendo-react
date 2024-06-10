@@ -11,6 +11,18 @@ body {
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: (var(--background));
+  color: (var(--text));
+}
+
+.light {
+  --background: #ffffff;
+  --text: #000000;
+}
+
+.dark {
+  --background: #333333;
+  --text: #ffffff;
 }
 
 code {
@@ -35,6 +47,19 @@ button{
 .w-100{
   width:100%
 }
+
+.glowing-text {
+  color: #fff; /* Text color */
+  text-shadow: 0 0 10px #00f, 0 0 20px #0ff, 0 0 30px #0f0, 0 0 40px #ff0, 0 0 50px #f00; /* Text shadow with multiple layers */
+  animation: glow 1s infinite alternate; /* Animation for the glowing effect */
+}
+
+@keyframes glow {
+  to {
+    text-shadow: 0 0 20px #00f, 0 0 30px #0ff, 0 0 40px #0f0, 0 0 50px #ff0, 0 0 60px #f00; /* Change text shadow to create pulsating effect */
+  }
+}
+
 
 
 

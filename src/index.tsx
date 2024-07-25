@@ -12,6 +12,7 @@ import ar from '../src/assets/i18n/ar.json';
 import ch from '../src/assets/i18n/ch.json';
 import vn from '../src/assets/i18n/vn.json';
 import i18next from 'i18next';
+import { Provider } from 'react-redux'
 
 i18n
   .use(initReactI18next)
@@ -37,7 +38,10 @@ const root = ReactDOM.createRoot(
 root.render(
   <I18nextProvider i18n={i18next}>
     <React.StrictMode>
-      <App />
+      {/* <Provider store={store}> */}
+        <App />
+      {/* </Provider> */}
+      
     </React.StrictMode>
   </I18nextProvider>
 

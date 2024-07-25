@@ -134,12 +134,13 @@ const ParentContainer = () => {
 
     return (
         <div className='topAndSideHeader'>
+            <div className="navMain">
             <nav className="navbar ">
                 <div className="container-fluid">
                     <div className="d-flex justify-content-between w-100">
                         <div className='curp' onClick={() => routeChange('/')}>
                             <img src={kendoka} alt="" width="40px" height='40px' />
-                            <span className="navbar-brand mb-0 h1 ml-15">Kendo React Boot</span>
+                            <span className="navbar-brand mb-0 h1 ml-15"></span>
                         </div>
 
                         <div className={`navRightMenu d-flex justify-content-between ${isExpandedProfile ? 'w-20rem' : 'w-7rem'}`}>
@@ -184,13 +185,14 @@ const ParentContainer = () => {
                                 <Avatar rounded="full" type="icon" style={{ marginRight: 5 }}>
                                     <SvgIcon icon={userIcon} />
                                 </Avatar>
-                                <span>iamNoddy</span><span className="k-icon k-font-icon k-i-chevron-down curp"></span>
+                                <span className="userName">iamNoddydsddfdfdfsdfdfgdrg</span><span className="k-icon k-font-icon k-i-chevron-down curp"></span>
                             </div>
                         </div>
                     </div>
                 </div>
             </nav>
-
+            </div>
+            <div className={`bodyMain `}>
             <div id="leftSidebar" onMouseOver={MouseOverLeftSidebar} onMouseOut={MouseOutLeftSidebar} className={`sidebar sidebar-left ${leftSidebarVisible ? 'show-left' : ''}`}>
                 <div className="pt-3 pb-3 e">
                     <ul className="nav flex-column leftUl" >
@@ -202,6 +204,9 @@ const ParentContainer = () => {
                         </li>
                         <li className="nav-item d-flex" onClick={() => routeChange('/Post')}>
                             <a className="nav-link e link-text"  >{t('post')}</a> <span className="k-icon k-font-icon k-i-inherited"></span>
+                        </li>
+                        <li className="nav-item d-flex" onClick={() => routeChange('/todo')}>
+                            <a className="nav-link e link-text"  > {t('todo')} </a> <span className="k-icon k-font-icon k-i-track-changes"></span>
                         </li>
                         <li className="nav-item d-flex" onClick={() => routeChange('/profile')}>
                             <a className="nav-link e link-text"  >{t('profile')}</a> <span className="k-icon k-font-icon k-i-user"></span>
@@ -238,6 +243,7 @@ const ParentContainer = () => {
                     <Route path='/setting' element={< SettingComponent />}></Route>
                 </Routes>
 
+            </div>
             </div>
         </div>
 

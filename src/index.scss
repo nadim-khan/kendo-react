@@ -11,13 +11,14 @@ body {
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: (var(--background));
+  // background-color: (var(--background));
+  background: url(./assets/images/body-background.png) 0% 20% ;
   color: (var(--text));
 }
 
 .light {
-  --background: #ffffff;
-  --text: #000000;
+  --background: #333333;
+  --text: #fff;
 }
 
 .dark {

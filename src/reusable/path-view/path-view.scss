@@ -1,0 +1,14 @@
+.k-breadcrumb {
+    background-color: transparent;
+    color:#fff;
+        a:hover{
+            background-color: transparent !important;
+            box-shadow: #fff;
+            color:#fff;
+        }
+       
+}
+.k-breadcrumb-link:focus, .k-breadcrumb-link.k-focus {
+    background-color: #668ef6a5;
+    color: #fff;
+}

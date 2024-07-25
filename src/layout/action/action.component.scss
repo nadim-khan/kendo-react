@@ -25,10 +25,16 @@
     }
 
     li:hover {
-       background-color: red;
-       a{
-           color:#fff
-       }
+        transition: all 0.65s;
+        background-color:rgba(27, 61, 135, 0.623);
+        border-top-left-radius: 5px;
+        border-bottom-left-radius: 5px;
+        color:#fff;
+        a{
+            color:#fff;
+            font-size: 14px;
+            transition: all 0.25s;
+        }
        
     }
 }
